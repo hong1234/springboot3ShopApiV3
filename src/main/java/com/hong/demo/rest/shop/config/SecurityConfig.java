@@ -1,6 +1,6 @@
 package com.hong.demo.rest.shop.config; 
 
-import java.util.List;
+import java.util.List; 
 import java.util.Arrays;
 
 import java.io.InputStream;
@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import org.springframework.http.HttpMethod;
 
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -85,7 +87,8 @@ public class SecurityConfig {
         http.csrf((csrf) -> csrf.disable());
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authorizeHttpRequests((authz) -> authz
-            .requestMatchers("/api/v1/auth/signin").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/v1/auth/signin").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
             .anyRequest().authenticated()
         )
         .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
