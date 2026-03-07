@@ -1,38 +1,38 @@
 package com.hong.demo.rest.shop.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.hong.demo.rest.shop.service.*;
 import com.hong.demo.rest.shop.domain.*;
+
 
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    private UserService userService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/signin")
-    @ResponseStatus(HttpStatus.OK)
-    public SignedInUser signIn() throws ServiceException {  
-        CustomerEntity customer = userService.findUserByUsername("admin");
-        return userService.createSignedInUser(customer);
-        // if (passwordEncoder.matches(signInReq.getPassword(), userEntity.getPassword())) {
-        //     return ok(service.getSignedInUser(userEntity));
-        // }
-        // throw new InsufficientAuthenticationException("Unauthorized.");
+    @PostMapping("/signin")
+    public ResponseEntity<SignedInUser> signIn(@RequestBody @Valid LoginDTO signInReq) throws ServiceException {
+        CustomerEntity customer = userService.findUserByUsername(signInReq.getUsername());
+        if (passwordEncoder.matches(signInReq.getPassword(), customer.getPassword())) {
+            return ResponseEntity.ok(userService.createSignedInUser(customer));
+        }
+        throw new InsufficientAuthenticationException("Unauthorized.");
     }
-
-    // public ResponseEntity<SignedInUser> signIn(@Valid SignInReq signInReq) {
-    //     UserEntity userEntity = service.findUserByUsername(signInReq.getUsername());
-    //     if (passwordEncoder.matches(signInReq.getPassword(), userEntity.getPassword())) {
-    //         return ok(service.getSignedInUser(userEntity));
-    //     }
-    //     throw new InsufficientAuthenticationException("Unauthorized.");
-    // }
 
 }
