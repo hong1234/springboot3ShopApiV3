@@ -2,7 +2,7 @@
 
 # run API server
 
-cd C:\HONG\JAVA2026\Sym3SHOP\HONG
+// cd C:\HONG\JAVA2026\Sym3SHOP\HONG
 
 git clone https://github.com/hong1234/springboot3ShopApiV3.git
 
@@ -14,11 +14,11 @@ cd springboot3ShopApiV3
 
 ./mvnw test
 
-# test using UI-App sb3ShopUI-ReactTanStack
+# test API using UI-App sb3ShopUIV3-ReactTanStack
 
-git clone https://github.com/hong1234/sb3ShopUI-ReactTanStack.git
+git clone https://github.com/hong1234/sb3ShopUIV3-ReactTanStack.git
 
-cd sb3ShopUI-ReactTanStack
+cd sb3ShopUIV3-ReactTanStack
 
 npm install
 
