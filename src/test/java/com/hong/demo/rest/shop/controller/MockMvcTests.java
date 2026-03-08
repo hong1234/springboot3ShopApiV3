@@ -27,6 +27,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 @SpringBootTest
 @AutoConfigureMockMvc
 // @ActiveProfiles("mockMvc")
+// @WithMockUser
 public class MockMvcTests {
 
     @Autowired

@@ -128,43 +128,6 @@ public class CartServiceTest {
     }
 
     // @Test
-    // void addNewCartItem() {
-    //     when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
-    //     when(productRepository.findById(UUID.fromString("892422cd-0835-479e-84de-9265d3f2dc6a"))).thenReturn(Optional.of(newProduct));
-    //     when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);
-
-    //     CartItemDTO dto = new CartItemDTO();
-    //     dto.setProductId("892422cd-0835-479e-84de-9265d3f2dc6a");
-    //     dto.setModus("add");
-
-    //     try {
-    //         Cart cartNow = cartService.addItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
-    //         CartItem item = cartNow.items().get(1);
-    //         assertEquals("JavaScript for Beginner", item.title(), "title should match");
-    //         assertEquals(1, item.qty(), "qty should match");
-    //     } catch (Exception e) {
-    //         System.out.println(e.getMessage());
-    //     }
-    // }
-
-    // @Test
-    // void addOneCartItem() {
-    //     when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
-    //     when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);
-
-    //     CartItemDTO dto = new CartItemDTO();
-    //     dto.setProductId("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe");
-    //     dto.setModus("add");
-
-    //     try {
-    //         Cart cartNow = cartService.addItem("3395a42e-2d88-40de-b95f-e00e1502085b", dto);
-    //         assertEquals(2, cartNow.items().get(0).qty(), "qty should match");
-    //     } catch (Exception e) {
-    //         System.out.println(e.getMessage());
-    //     }
-    // }
-
-    // @Test
     // void removeOneCartItem() {
     //     when(customerRepository.findById(UUID.fromString("3395a42e-2d88-40de-b95f-e00e1502085b"))).thenReturn(Optional.of(customer));
     //     when(cartRepository.save(any(CartEntity.class))).thenReturn(cart);

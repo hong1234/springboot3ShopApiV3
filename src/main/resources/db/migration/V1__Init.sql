@@ -1,4 +1,4 @@
-create schema if not exists ecomm;
+-- create schema if not exists ecomm;
 
 -- DROP TABLE categories IF EXISTS;
 -- DROP TABLE products IF EXISTS;

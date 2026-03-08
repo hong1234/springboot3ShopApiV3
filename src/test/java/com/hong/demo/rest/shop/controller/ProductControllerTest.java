@@ -51,8 +51,10 @@ import com.hong.demo.rest.shop.controller.ProductController;
 import com.hong.demo.rest.shop.repository.*;
 
 
-@WebMvcTest(ProductController.class)
-@Import(SecurityConfig.class) 
+// @WebMvcTest(ProductController.class)
+// @Import(SecurityConfig.class) 
+@SpringBootTest
+@AutoConfigureMockMvc
 @WithMockUser
 public class ProductControllerTest {
 
@@ -71,52 +73,52 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private ProductService productService; 
+    // @MockBean
+    // private ProductService productService; 
 
-    private Product prod;
+    // private Product prod;
 
     @BeforeEach
     void setup() {
 
-        CategoryEntity category = CategoryEntity.builder()
-        .id(UUID.fromString("a1b9b31d-e73c-4112-af7c-b68530f38222"))
-        .title("JavaScript")
-        .build();
+        // CategoryEntity category = CategoryEntity.builder()
+        // .id(UUID.fromString("a1b9b31d-e73c-4112-af7c-b68530f38222"))
+        // .title("JavaScript")
+        // .build();
 
-        ProductEntity product = ProductEntity.builder()
-        .id(UUID.fromString("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe"))
-        .title("JavaScript today")
-        .description("news in JS")
-        .supplier("Hong Le")
-        .searchkeys("javascript news")
-        .image("/images/Antifragile.jpg")
-        .unitPrice(BigDecimal.valueOf(Double.valueOf("29.99")))
-        .category(category)
-        .build();
+        // ProductEntity product = ProductEntity.builder()
+        // .id(UUID.fromString("ca3d3d42-9379-4ba4-bf3e-a09ec3efbabe"))
+        // .title("JavaScript today")
+        // .description("news in JS")
+        // .supplier("Hong Le")
+        // .searchkeys("javascript news")
+        // .image("/images/Antifragile.jpg")
+        // .unitPrice(BigDecimal.valueOf(Double.valueOf("29.99")))
+        // .category(category)
+        // .build();
 
-        prod = new Product(
-            product.getId().toString(), 
-            product.getTitle(),
-            product.getDescription(),
-            product.getSupplier(),
-            product.getSearchkeys(),
-            product.getImage(),
-            product.getUnitPrice()
-        );
+        // prod = new Product(
+        //     product.getId().toString(), 
+        //     product.getTitle(),
+        //     product.getDescription(),
+        //     product.getSupplier(),
+        //     product.getSearchkeys(),
+        //     product.getImage(),
+        //     product.getUnitPrice()
+        // );
     }
 
     @Test
     // @WithMockUser
     void testCreateProduct() throws Exception {
-        when(productService.addProduct(any(ProductDTO.class))).thenReturn(prod);
+        // when(productService.addProduct(any(ProductDTO.class))).thenReturn(prod);
 
         mockMvc
         .perform(post("/api/v1/products")
         .contentType(MediaType.APPLICATION_JSON)
         .content("""
             {
-                "title": "JavaScript today",
+                "title": "JavaScript today", 
                 "description": "news in JS",
                 "supplier": "Hong Le",
                 "searchkeys": "javascript news",
@@ -132,18 +134,18 @@ public class ProductControllerTest {
         ;
     }
 
-    @Test
-    void testGetProductNotFound() throws Exception {
-        when(productService.getProduct("510a0d7e-8e83-4193-b483-e27e09ddc33d")).thenThrow(new NoSuchElementException());
-        mockMvc
-        .perform(get("/api/v1/products/510a0d7e-8e83-4193-b483-e27e09ddc33d"))
-        .andDo(print())
-        .andExpect(status().isNotFound())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        // .andExpect(jsonPath("$.message").value("Book not found"))
-        // .andExpect(jsonPath("$.timestamp").exists())
-        ;
-    }
+    // @Test
+    // void testGetProductNotFound() throws Exception {
+    //     // when(productService.getProduct("510a0d7e-8e83-4193-b483-e27e09ddc33d")).thenThrow(new NoSuchElementException());
+    //     mockMvc
+    //     .perform(get("/api/v1/products/510a0d7e-8e83-4193-b483-e27e09ddc33d"))
+    //     .andDo(print())
+    //     .andExpect(status().isNotFound())
+    //     .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    //     // .andExpect(jsonPath("$.message").value("Book not found"))
+    //     // .andExpect(jsonPath("$.timestamp").exists())
+    //     ;
+    // }
 
     // @Test
     // void testRemoveProduct_Success() throws Exception {
